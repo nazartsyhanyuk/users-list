@@ -1,0 +1,53 @@
+<!-- Page Content -->
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h1 class="page-header">Services
+                <small>What We Do</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="../../index.html">Home</a>
+                </li>
+                <li class="active">Services</li>
+            </ol>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+        <table class="table newuser">
+            <tr>
+                <td><input type="number" min="1" ng-model="id" placeholder="enter id"></td>
+                <td><input type="text" ng-model="name" placeholder="enter name"></td>
+                <td><input type="number" min="18" max="100" ng-model="age" placeholder="enter age"></td>
+                <td><button class="btn btn-default" ng-click="addUser()">ADD</button></td>
+            </tr>
+        </table>
+
+       <table id="userslist" class="table table-bordered table-hover">
+           <tr>
+               <th>id</th>
+               <th>name</th>
+               <th>age</th>
+               <th>options</th>
+           </tr>
+           <tr ng-repeat="user in users">
+               <td><span>{{user.id}}</span></td>
+               <td><input type="text" ng-model="user.name" ng-show="user.editModeOn"><span ng-hide="user.editModeOn">{{user.name}}</span></td>
+               <td><input type="text" ng-model="user.age" ng-show="user.editModeOn"><span ng-hide="user.editModeOn">{{user.age}}</span></td>
+               <td>
+                   <button class="btn btn-default" ng-click="saveChangesAction(user)" ng-show="user.editModeOn">Save</button>
+                   <button class="btn btn-default" ng-click="cancelChangesAction(user)" ng-show="user.editModeOn">Cancel</button>
+                   <button class="btn btn-default" ng-click="editUserAction(user)" ng-hide="user.editModeOn">Edit</button>
+               </td>
+           </tr>
+       </table>
+
+    </div>
+
+</div>
+<!-- /.container -->
