@@ -36,6 +36,9 @@
                 UsrColl.cancelChanges(user);
             };
         };
+        $scope.deleteUserAction = function(index) {
+            UsrColl.deleteUser(index);
+        }
 
 
     }

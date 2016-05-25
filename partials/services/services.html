@@ -35,7 +35,7 @@
                <th>age</th>
                <th>options</th>
            </tr>
-           <tr ng-repeat="user in users">
+           <tr ng-repeat="user in users track by $index">
                <td><span>{{user.id}}</span></td>
                <td><input type="text" ng-model="user.name" ng-show="user.editModeOn"><span ng-hide="user.editModeOn">{{user.name}}</span></td>
                <td><input type="text" ng-model="user.age" ng-show="user.editModeOn"><span ng-hide="user.editModeOn">{{user.age}}</span></td>
@@ -43,6 +43,8 @@
                    <button class="btn btn-default" ng-click="saveChangesAction(user)" ng-show="user.editModeOn">Save</button>
                    <button class="btn btn-default" ng-click="cancelChangesAction(user)" ng-show="user.editModeOn">Cancel</button>
                    <button class="btn btn-default" ng-click="editUserAction(user)" ng-hide="user.editModeOn">Edit</button>
+                   <button class="btn btn-default" ng-click="deleteUserAction($index)" ng-hide="user.editModeOn">Delete</button>
+
                </td>
            </tr>
        </table>

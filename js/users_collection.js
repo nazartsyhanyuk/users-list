@@ -49,6 +49,10 @@
                 return !this.items.filter(function(item){
                     return currentUser.id==item.id
                 }).length;
+            },
+            deleteUser: function(index) {
+                this.items.splice(index, 1);
+                localStorage.setItem('items', JSON.stringify(this.items));
             }
             
 
