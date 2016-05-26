@@ -124,6 +124,15 @@ footer {
 #userslist td, .newuser td {
     width: 25%;
 }
+.newuser td {
+    height: 86px;
+}
 .newuser input {
-    width: 50%;
+    width: 100%;
+}
+.validationError {
+    background-color: pink;
+}
+.validationSuccess {
+    background-color: lightseagreen;
 }

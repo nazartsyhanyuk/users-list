@@ -19,14 +19,29 @@
     <!-- /.row -->
 
     <div class="row">
+        <form name="addUser" ng-submit="addNewUser()" novalidate>
         <table class="table newuser">
             <tr>
-                <td><input type="number" min="1" ng-model="id" placeholder="enter id"></td>
-                <td><input type="text" ng-model="name" placeholder="enter name"></td>
-                <td><input type="number" min="18" max="100" ng-model="age" placeholder="enter age"></td>
-                <td><button class="btn btn-default" ng-click="addUser()">ADD</button></td>
+                <td>
+                    <input type="number" class="form-control" name="newId" min="1" max="10000" ng-model="id" ng-class="getIdValidationClass(addUser)" placeholder="enter unique id (1-10000)" required>
+                    <p ng-show="idHintVisibility1" class="help-block">Enter correct id!</p>
+                    <p ng-show="idHintVisibility2" class="help-block">User with this id is already exists!</p>
+
+                </td>
+                <td>
+                    <input type="text" class="form-control" name="newName" ng-model="name" ng-minlength="2" ng-maxlength="12"  ng-class="getNameValidationClass(addUser)" placeholder="enter name" required>
+                    <p ng-show="addUser.newName.$error.minlength" class="help-block">Username is too short.</p>
+                    <p ng-show="addUser.newName.$error.maxlength" class="help-block">Username is too long.</p>
+                </td>
+                <td>
+                    <input type="number" class="form-control" name="newAge" min="18" max="100" ng-model="age" ng-class="getAgeValidationClass(addUser)" placeholder="enter age (18-100)" required>
+                    <p ng-show="addUser.newAge.$error.min" class="help-block">Too young!</p>
+                    <p ng-show="addUser.newAge.$error.max" class="help-block">Too old!</p>
+                </td>
+                <td><button type="submit" class="btn btn-default" ng-disabled="enableAddButton(addUser)">ADD</button></td>
             </tr>
         </table>
+        </form>
 
        <table id="userslist" class="table table-bordered table-hover">
            <tr>
@@ -35,17 +50,19 @@
                <th>age</th>
                <th>options</th>
            </tr>
+           <tr ng-hide="checkingUsersCount()"> <td colspan="4" style="text-align: center">Empty!</td> </tr>
            <tr ng-repeat="user in users track by $index">
                <td><span>{{user.id}}</span></td>
-               <td><input type="text" ng-model="user.name" ng-show="user.editModeOn"><span ng-hide="user.editModeOn">{{user.name}}</span></td>
-               <td><input type="text" ng-model="user.age" ng-show="user.editModeOn"><span ng-hide="user.editModeOn">{{user.age}}</span></td>
-               <td>
-                   <button class="btn btn-default" ng-click="saveChangesAction(user)" ng-show="user.editModeOn">Save</button>
+               <form name="currentUserData" novalidate>
+                    <td><input type="text" name="currentName" class="form-control" ng-model="user.name" ng-minlength="2" ng-maxlength="12" ng-show="user.editModeOn" ng-class="getEditedNameValidationClass(currentUserData)" required><span ng-hide="user.editModeOn">{{user.name}}</span></td>
+                    <td><input type="text" name="currentAge" class="form-control" ng-model="user.age" min="18" max="100" ng-show="user.editModeOn" ng-class="getEditedAgeValidationClass(currentUserData)" required><span ng-hide="user.editModeOn">{{user.age}}</span></td>
+               </form>
+                    <td>
+                   <button class="btn btn-default" ng-click="saveChangesAction(user)" ng-show="user.editModeOn" ng-disabled="enableSaveButton(currentUserData)">Save</button>
                    <button class="btn btn-default" ng-click="cancelChangesAction(user)" ng-show="user.editModeOn">Cancel</button>
                    <button class="btn btn-default" ng-click="editUserAction(user)" ng-hide="user.editModeOn">Edit</button>
                    <button class="btn btn-default" ng-click="deleteUserAction($index)" ng-hide="user.editModeOn">Delete</button>
-
-               </td>
+                    </td>
            </tr>
        </table>
 

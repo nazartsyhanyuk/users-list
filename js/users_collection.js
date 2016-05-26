@@ -53,6 +53,11 @@
             deleteUser: function(index) {
                 this.items.splice(index, 1);
                 localStorage.setItem('items', JSON.stringify(this.items));
+            },
+            validateId: function(id) {
+                return this.items.filter(function(item){
+                    return id==item.id
+                }).length;
             }
             
 
