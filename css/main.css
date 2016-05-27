@@ -124,6 +124,9 @@ footer {
 #userslist td, .newuser td {
     width: 25%;
 }
+#userslist th {
+    cursor: pointer;
+}
 .newuser td {
     height: 106px;
 }
@@ -135,4 +138,10 @@ footer {
 }
 .validationSuccess {
     background-color: lightseagreen;
+}
+.sortorder:after {
+    content: '\25b2';
+}
+.sortorder.reverse:after {
+    content: '\25bc';
 }

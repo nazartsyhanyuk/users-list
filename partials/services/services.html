@@ -45,13 +45,13 @@
 
        <table id="userslist" class="table table-bordered table-hover">
            <tr>
-               <th>id</th>
-               <th>name</th>
-               <th>age</th>
+               <th ng-click="order('id')">id<span class="sortorder" ng-show="predicate === 'id'" ng-class="{reverse:reverse}"></span></th>
+               <th ng-click="order('name')">name<span class="sortorder" ng-show="predicate === 'name'" ng-class="{reverse:reverse}"></span></th>
+               <th ng-click="order('age')">age<span class="sortorder" ng-show="predicate === 'age'" ng-class="{reverse:reverse}"></span></th>
                <th>options</th>
            </tr>
            <tr ng-hide="checkingUsersCount()"> <td colspan="4" style="text-align: center">Empty!</td> </tr>
-           <tr ng-repeat="user in users track by $index">
+           <tr ng-repeat="user in users.items track by $index">
                <td><span>{{user.id}}</span></td>
 
                     <td>
