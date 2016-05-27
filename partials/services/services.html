@@ -23,13 +23,13 @@
         <table class="table newuser">
             <tr>
                 <td>
-                    <input type="number" class="form-control" name="newId" min="1" max="10000" ng-model="id" ng-class="getIdValidationClass(addUser)" placeholder="enter unique id (1-10000)" required>
-                    <p ng-show="idHintVisibility1" class="help-block">Enter correct id!</p>
+                    <input type="number" class="form-control" name="newId" min="1" max="10000" ng-model="id" ng-class="getIdValidationClass(addUser)" placeholder="enter unique id" required>
+                    <p ng-show="idHintVisibility1" class="help-block">Enter correct id! (Between 1-10000)</p>
                     <p ng-show="idHintVisibility2" class="help-block">User with this id is already exists!</p>
 
                 </td>
                 <td>
-                    <input type="text" class="form-control" name="newName" ng-model="name" ng-minlength="2" ng-maxlength="12"  ng-class="getNameValidationClass(addUser)" placeholder="enter name" required>
+                    <input type="text" name="newName" class="form-control" ng-model="name" ng-minlength="2" ng-maxlength="12"  ng-class="getNameValidationClass(addUser)" placeholder="enter name" required>
                     <p ng-show="addUser.newName.$error.minlength" class="help-block">Username is too short.</p>
                     <p ng-show="addUser.newName.$error.maxlength" class="help-block">Username is too long.</p>
                 </td>
@@ -53,12 +53,22 @@
            <tr ng-hide="checkingUsersCount()"> <td colspan="4" style="text-align: center">Empty!</td> </tr>
            <tr ng-repeat="user in users track by $index">
                <td><span>{{user.id}}</span></td>
-               <form name="currentUserData" novalidate>
-                    <td><input type="text" name="currentName" class="form-control" ng-model="user.name" ng-minlength="2" ng-maxlength="12" ng-show="user.editModeOn" ng-class="getEditedNameValidationClass(currentUserData)" required><span ng-hide="user.editModeOn">{{user.name}}</span></td>
-                    <td><input type="text" name="currentAge" class="form-control" ng-model="user.age" min="18" max="100" ng-show="user.editModeOn" ng-class="getEditedAgeValidationClass(currentUserData)" required><span ng-hide="user.editModeOn">{{user.age}}</span></td>
-               </form>
+
                     <td>
-                   <button class="btn btn-default" ng-click="saveChangesAction(user)" ng-show="user.editModeOn" ng-disabled="enableSaveButton(currentUserData)">Save</button>
+                        <form name="currentUserName" novalidate>
+                            <input type="text" name="currentName" class="form-control" ng-model="user.name" ng-minlength="2" ng-maxlength="12" ng-show="user.editModeOn" ng-class="getEditedNameValidationClass(currentUserName)" required>
+                        </form>
+                            <span ng-hide="user.editModeOn">{{user.name}}</span>
+                    </td>
+                    <td>
+                        <form name="currentUserAge" novalidate>
+                            <input type="number" name="currentAge" class="form-control" ng-model="user.age" min="18" max="100" ng-show="user.editModeOn" ng-class="getEditedAgeValidationClass(currentUserAge)" required>
+                        </form>
+                            <span ng-hide="user.editModeOn">{{user.age}}</span>
+                    </td>
+
+                    <td>
+                   <button class="btn btn-default" ng-click="saveChangesAction(user)" ng-show="user.editModeOn" ng-disabled="enableSaveButton(currentUserName, currentUserAge)">Save</button>
                    <button class="btn btn-default" ng-click="cancelChangesAction(user)" ng-show="user.editModeOn">Cancel</button>
                    <button class="btn btn-default" ng-click="editUserAction(user)" ng-hide="user.editModeOn">Edit</button>
                    <button class="btn btn-default" ng-click="deleteUserAction($index)" ng-hide="user.editModeOn">Delete</button>

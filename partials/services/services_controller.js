@@ -26,6 +26,30 @@
                 user.editModeOn = true;
                 UsrColl.editMode(user);
 
+            $scope.getEditedNameValidationClass = function(formname) {
+                if(formname.currentName.$error.minlength || formname.currentName.$error.maxlength) {
+                    return "validationError"
+                }
+                else if (formname.currentName.$valid) {
+                    return "validationSuccess"
+                }
+            };
+            $scope.getEditedAgeValidationClass = function(formname) {
+                if(formname.currentAge.$error.min || formname.currentAge.$error.max) {
+                    return "validationError"
+                }
+                else if(formname.$valid) {
+                    return "validationSuccess"
+                }
+            }
+
+
+             $scope.enableSaveButton = function(currentUserName, currentUserAge) {
+                 return (currentUserName.$invalid || currentUserAge.$invalid);
+             }
+
+
+
             $scope.saveChangesAction = function(user) {
                 if(user.name && user.age) {
                     user.editModeOn = false;
@@ -88,6 +112,8 @@
         $scope.checkingUsersCount = function() {
             return ($scope.users.length);
         };
+
+
 
         
 
