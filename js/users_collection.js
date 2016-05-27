@@ -5,7 +5,7 @@
 
 
     function UsersCollection(UserModel) {
-        var items = JSON.parse(localStorage.getItem('items')) || [];//[{id: 1, name: 'Andrew', age: 20}, {id: 2, name: 'Josh', age: 21}, {id: 3,name: 'George',age: 22}];
+        var items = JSON.parse(localStorage.getItem('items')) || [];
         var Users = function(data){
             this.items = [];
             if (data) {
@@ -18,9 +18,6 @@
                if(this.validateNewUser(data)) {
                    this.items.push(new UserModel(data));
                    localStorage.setItem('items', JSON.stringify(this.items));
-               }
-                else {
-                   alert("user with this id is already exists!");
                }
             },
             initData: function(data) {

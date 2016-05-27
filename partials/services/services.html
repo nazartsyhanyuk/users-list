@@ -23,18 +23,18 @@
         <table class="table newuser">
             <tr>
                 <td>
-                    <input type="number" class="form-control" name="newId" min="1" max="10000" ng-model="id" ng-class="getIdValidationClass(addUser)" placeholder="enter unique id" required>
+                    <input type="number" class="form-control" name="newId" min="{{newUser.minUserId}}" max="{{newUser.maxUserId}}" ng-model="id" ng-class="getIdValidationClass(addUser)" placeholder="enter unique id" required>
                     <p ng-show="idHintVisibility1" class="help-block">Enter correct id! (Between 1-10000)</p>
                     <p ng-show="idHintVisibility2" class="help-block">User with this id is already exists!</p>
 
                 </td>
                 <td>
-                    <input type="text" name="newName" class="form-control" ng-model="name" ng-minlength="2" ng-maxlength="12"  ng-class="getNameValidationClass(addUser)" placeholder="enter name" required>
+                    <input type="text" name="newName" class="form-control" ng-model="name" ng-minlength="{{newUser.minUserNameLength}}" ng-maxlength="{{newUser.maxUserNameLength}}"  ng-class="getNameValidationClass(addUser)" placeholder="enter name" required>
                     <p ng-show="addUser.newName.$error.minlength" class="help-block">Username is too short.</p>
                     <p ng-show="addUser.newName.$error.maxlength" class="help-block">Username is too long.</p>
                 </td>
                 <td>
-                    <input type="number" class="form-control" name="newAge" min="18" max="100" ng-model="age" ng-class="getAgeValidationClass(addUser)" placeholder="enter age (18-100)" required>
+                    <input type="number" class="form-control" name="newAge" min="{{newUser.minUserAge}}" max="{{newUser.maxUserAge}}" ng-model="age" ng-class="getAgeValidationClass(addUser)" placeholder="enter age (18-100)" required>
                     <p ng-show="addUser.newAge.$error.min" class="help-block">Too young!</p>
                     <p ng-show="addUser.newAge.$error.max" class="help-block">Too old!</p>
                 </td>
@@ -56,13 +56,13 @@
 
                     <td>
                         <form name="currentUserName" novalidate>
-                            <input type="text" name="currentName" class="form-control" ng-model="user.name" ng-minlength="2" ng-maxlength="12" ng-show="user.editModeOn" ng-class="getEditedNameValidationClass(currentUserName)" required>
+                            <input type="text" name="currentName" class="form-control" ng-model="user.name" ng-minlength="{{newUser.minUserNameLength}}" ng-maxlength="{{newUser.maxUserNameLength}}" ng-show="user.editModeOn" ng-class="getEditedNameValidationClass(currentUserName)" required>
                         </form>
                             <span ng-hide="user.editModeOn">{{user.name}}</span>
                     </td>
                     <td>
                         <form name="currentUserAge" novalidate>
-                            <input type="number" name="currentAge" class="form-control" ng-model="user.age" min="18" max="100" ng-show="user.editModeOn" ng-class="getEditedAgeValidationClass(currentUserAge)" required>
+                            <input type="number" name="currentAge" class="form-control" ng-model="user.age" min="{{newUser.minUserAge}}" max="{{newUser.maxUserAge}}" ng-show="user.editModeOn" ng-class="getEditedAgeValidationClass(currentUserAge)" required>
                         </form>
                             <span ng-hide="user.editModeOn">{{user.age}}</span>
                     </td>

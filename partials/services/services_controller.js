@@ -1,78 +1,75 @@
-(function(){
+(function () {
     angular
         .module('tutorialWebApp')
         .controller('ServicesCtrl', ServicesCtrl);
 
 
-    function ServicesCtrl($scope, UsersCollection) {
+    function ServicesCtrl($scope, UsersCollection, UserModel) {
         var UsrColl = UsersCollection.initCollection();
         $scope.users = UsrColl.getItems();
-        
-        
-        $scope.addNewUser = function() {
+        $scope.newUser = new UserModel();
+        $scope.addNewUser = function () {
             var data = {};
             data.id = $scope.id;
             data.name = $scope.name;
             data.age = $scope.age;
-                UsrColl.addItems(data);
-                $scope.id = '';
-                $scope.name = '';
-                $scope.age = '';
-                $scope.bgColorId={};
-                $scope.bgColorAge={};
-                $scope.bgColorName={};
+            UsrColl.addItems(data);
+            $scope.id = '';
+            $scope.name = '';
+            $scope.age = '';
+            $scope.bgColorId = {};
+            $scope.bgColorAge = {};
+            $scope.bgColorName = {};
         };
-        $scope.editUserAction = function(user) {
-                user.editModeOn = true;
-                UsrColl.editMode(user);
+        $scope.editUserAction = function (user) {
+            user.editModeOn = true;
+            UsrColl.editMode(user);
 
-            $scope.getEditedNameValidationClass = function(formname) {
-                if(formname.currentName.$error.minlength || formname.currentName.$error.maxlength) {
+            $scope.getEditedNameValidationClass = function (formname) {
+                if (formname.currentName.$error.minlength || formname.currentName.$error.maxlength) {
                     return "validationError"
                 }
                 else if (formname.currentName.$valid) {
                     return "validationSuccess"
                 }
             };
-            $scope.getEditedAgeValidationClass = function(formname) {
-                if(formname.currentAge.$error.min || formname.currentAge.$error.max) {
+            $scope.getEditedAgeValidationClass = function (formname) {
+                if (formname.currentAge.$error.min || formname.currentAge.$error.max) {
                     return "validationError"
                 }
-                else if(formname.$valid) {
+                else if (formname.$valid) {
                     return "validationSuccess"
                 }
-            }
+            };
 
 
-             $scope.enableSaveButton = function(currentUserName, currentUserAge) {
-                 return (currentUserName.$invalid || currentUserAge.$invalid);
-             }
+            $scope.enableSaveButton = function (currentUserName, currentUserAge) {
+                return (currentUserName.$invalid || currentUserAge.$invalid);
+            };
 
-
-
-            $scope.saveChangesAction = function(user) {
-                if(user.name && user.age) {
+            $scope.saveChangesAction = function (user) {
+                if (user.name && user.age) {
                     user.editModeOn = false;
                     UsrColl.saveChanges(user);
                 }
             };
-            
-            $scope.cancelChangesAction = function(user) {
+
+            $scope.cancelChangesAction = function (user) {
                 user.editModeOn = false;
                 UsrColl.cancelChanges(user);
             };
         };
-        $scope.deleteUserAction = function(index) {
+        $scope.deleteUserAction = function (index) {
             UsrColl.deleteUser(index);
         };
 
 
-        $scope.getIdValidationClass = function(addUser) {
-            if(UsrColl.validateId($scope.id)) {
+        $scope.getIdValidationClass = function (addUser) {
+            if (UsrColl.validateId($scope.id)) {
                 $scope.idHintVisibility2 = true;
                 return "validationError"
             }
-            else if(addUser.newId.$error.max || addUser.newId.$error.min) {
+            else if (addUser.newId.$error.max || addUser.newId.$error.min) {
                 $scope.idHintVisibility2 = false;
                 $scope.idHintVisibility1 = true;
                 return "validationError"
@@ -88,34 +85,30 @@
                 return ""
             }
         };
-        $scope.getNameValidationClass = function(addUser) {
-            if(addUser.newName.$error.minlength || addUser.newName.$error.maxlength) {
+        $scope.getNameValidationClass = function (addUser) {
+            if (addUser.newName.$error.minlength || addUser.newName.$error.maxlength) {
                 return "validationError"
             }
-            else if(addUser.newName.$valid) {
+            else if (addUser.newName.$valid) {
                 return "validationSuccess"
             }
             else return ""
         };
-        $scope.getAgeValidationClass = function(addUser) {
-            if(addUser.newAge.$error.min || addUser.newAge.$error.max) {
+        $scope.getAgeValidationClass = function (addUser) {
+            if (addUser.newAge.$error.min || addUser.newAge.$error.max) {
                 return "validationError"
             }
-            else if(addUser.newAge.$valid) {
+            else if (addUser.newAge.$valid) {
                 return "validationSuccess"
             }
             else return ""
         };
-        $scope.enableAddButton = function(addUser) {
+        $scope.enableAddButton = function (addUser) {
             return (addUser.$invalid || UsrColl.validateId($scope.id));
         };
-        $scope.checkingUsersCount = function() {
+        $scope.checkingUsersCount = function () {
             return ($scope.users.length);
         };
-
-
-
-        
 
 
     }
