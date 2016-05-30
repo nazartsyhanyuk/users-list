@@ -1,2 +1,2 @@
 # users-list
-DEMO: https://nazartsyhanyuk.github.io/users-list/#/services
+DEMO: https://nazartsyhanyuk.github.io/users-list/
