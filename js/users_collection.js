@@ -25,9 +25,6 @@
                     return new UserModel(item);
                 });
             },
-            /*getItems: function() {
-                return this.items;
-            },*/
             editMode: function(currentUser) {
                 currentUser.editUserMode();
                 console.log(currentUser);

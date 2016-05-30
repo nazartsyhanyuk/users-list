@@ -16,8 +16,8 @@
             this.age = '';
             this.oldValues = {};
             this.initData(data);
-
         };
+
         CreateUser.prototype.editUserMode = function () {
             this.oldValues = {
                 name: this.name,
@@ -32,10 +32,12 @@
                 this.age = newUserData.age;
             }
         };
+
         CreateUser.prototype.cancelChanges = function () {
             this.name = this.oldValues.name;
             this.age = this.oldValues.age;
         };
+
         CreateUser.prototype.initData = function(data) {
             if (data) {
                 this.id = data.id;
@@ -43,6 +45,7 @@
                 this.age = data.age;
             }
         };
+        
         return CreateUser;
     }
 })();

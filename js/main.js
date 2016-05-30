@@ -10,9 +10,8 @@
   app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
     // Home
-        .when("/", {templateUrl: "partials/home.html", controller: "PageCtrl"})
+        .when("/", {templateUrl: "partials/services/services.html", controller: "ServicesCtrl"})
         // Pages
-        .when("/services", {templateUrl: "partials/services/services.html", controller: "ServicesCtrl"})
         // else 404
         .otherwise("/404", {templateUrl: "partials/404.html", controller: "PageCtrl"});
   }]);

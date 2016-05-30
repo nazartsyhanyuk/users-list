@@ -121,6 +121,9 @@ footer {
         /* increases the carousel height so it looks good on phones */
     }
 }
+.main {
+    margin-top: 100px;
+}
 #userslist td, .newuser td {
     width: 25%;
 }
